@@ -1,0 +1,20 @@
+security:
+  # CRITICAL: Must match config.yml on all Paper/Purpur backend servers (minimum 32 chars)
+  shared-hmac-secret: "9f8e7d6c5b4a392817263544536271809a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d"
+  max-clock-skew-ms: 10000
+
+routing:
+  auth-lobby-server: "auth"
+  protected-backends:
+    - "survival"
+    - "boxmines"
+    - "kingdoms"
+
+premium:
+  # If true, ANY player with a legitimate paid Minecraft username automatically connects in Mojang Online-Mode
+  # and skips /register and /login completely!
+  auto-detect-paid-usernames: true
+  # Cache Mojang API lookups for 30 minutes to avoid rate-limiting
+  mojang-cache-minutes: 30
+  # Additional usernames manually forced into Mojang Online-Mode
+  enforced-usernames: []

@@ -1,0 +1,69 @@
+# ==========================================================
+# SecureLoginBackend - MiniMessage Localization
+# Author: Chéngzé 
+# ==========================================================
+
+prefix: "<gradient:#00d2ff:#3a7bd5><bold>SecureLogin</bold></gradient> <dark_gray>»</dark_gray> "
+
+auth:
+  register-prompt: "<yellow>Welcome! Please register using <aqua>/register <password> <confirmPassword></aqua>."
+  login-prompt: "<yellow>Welcome back! Please authenticate using <aqua>/login <password></aqua>."
+  register-usage: "<red>Usage: /register <password> <confirmPassword>"
+  login-usage: "<red>Usage: /login <password>"
+  changepass-usage: "<red>Usage: /changepassword <oldPassword> <newPassword>"
+  password-mismatch: "<red>Passwords do not match!"
+  password-weak: "<red>Password must be 8-64 characters and include at least one number."
+  already-registered: "<red>This account is already registered. Use /login <password>."
+  not-registered: "<red>This account is not registered yet. Use /register."
+  already-authenticated: "<green>You are already authenticated!"
+  register-success: "<green>Account registered and authenticated!"
+  login-success: "<green>Successfully authenticated!"
+  premium-auto-login: "<green>Verified Mojang Premium session! Automatically logged in."
+  session-resumed: "<green>Session resumed automatically from your trusted IP."
+  wrong-password: "<red>Incorrect password! (<yellow>%attempts%/%max%</yellow> attempts)"
+  wrong-old-password: "<red>Your current password is incorrect."
+  changepass-success: "<green>Your password has been updated and active sessions were refreshed."
+  logout-success: "<yellow>You have logged out safely."
+  must-authenticate: "<red>You must authenticate before performing this action!"
+
+premium:
+  status-verified: "<green>Account Status: <bold>Verified Mojang Premium</bold>"
+  status-cracked: "<yellow>Account Status: <bold>Offline / Password Protected</bold>"
+  link-requires-verified-session: "<red>Security Policy: To link Premium, add your username to proxy enforcement or FastLogin and reconnect with a legitimate Mojang launcher session."
+  link-success: "<green>Your account is now permanently bound to your verified Mojang UUID!"
+  unlink-usage: "<red>Usage: /premium unlink <newFallbackPassword>"
+  unlink-success: "<yellow>Premium auto-login unlinked. You can now log in using your fallback password."
+
+admin:
+  help: "<aqua>/auth <reload | unregister <player> | force-login <player>>"
+  no-permission: "<red>Insufficient permissions."
+  reload-success: "<green>Configuration and messages reloaded."
+  unregister-success: "<green>Unregistered account <white>%player%</white>."
+  account-not-found: "<red>No registered account found for <white>%player%</white>."
+  player-offline: "<red>Player <white>%player%</white> is not online."
+  forcelogin-success: "<green>Force-authenticated <white>%player%</white> (audit logged)."
+
+titles:
+  register-title: "<aqua><bold>REGISTER</bold></aqua>"
+  register-subtitle: "<gray>Use /register <password> <confirm></gray>"
+  login-title: "<green><bold>LOGIN</bold></green>"
+  login-subtitle: "<gray>Use /login <password></gray>"
+
+bossbar:
+  waiting: "<yellow>Please authenticate to play on the server</yellow>"
+
+actionbar:
+  timer: "<gold>Time remaining to authenticate: <white>%seconds%s</white></gold>"
+
+kick:
+  timeout: "<red>Authentication timed out! Please rejoin and log in."
+  temp-locked: "<red>Too many failed login attempts! Temporarily locked for <yellow>%seconds%s</yellow>."
+  direct-backend-denied: "<red>Direct backend connection rejected! Please connect through the official Proxy."
+  forged-proxy-payload: "<red>Security violation: Invalid or replayed proxy authentication signature."
+  identity-mismatch: "<red>Security violation: Proxy identity mismatch."
+  premium-impersonation-blocked: "<red>This username is protected by Verified Mojang Premium authentication!"
+  premium-uuid-mismatch: "<red>Security alert: Verified Mojang UUID does not match the bound account UUID!"
+  already-online: "<red>An authenticated session for this username is already active on the server!"
+  invalid-username: "<red>Invalid characters in username."
+  account-unregistered: "<yellow>Your account registration was reset by an administrator."
+  database-error: "<red>Authentication service is temporarily unavailable. Fail-closed protection active."

@@ -1,0 +1,8 @@
+com\chengze\securelogin\backend\listener\ProtectionListener.class
+com\chengze\securelogin\backend\hook\LuckPermsHook.class
+com\chengze\securelogin\backend\listener\ProxyChannelListener.class
+com\chengze\securelogin\backend\command\AuthCommands.class
+com\chengze\securelogin\backend\hook\SecureLoginPlaceholderExpansion.class
+com\chengze\securelogin\backend\SecureLoginBackend.class
+com\chengze\securelogin\backend\hook\LuckPermsHook$SecureLoginContextCalculator.class
+com\chengze\securelogin\backend\manager\AuthSessionManager.class

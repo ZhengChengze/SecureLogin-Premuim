@@ -1,0 +1,5 @@
+name: SecureLoginProxy
+main: com.chengze.securelogin.proxy.SecureLoginBungee
+version: v1.0.0-RELEASE
+author: Chéngzé
+description: Proxy authentication coordinator and cryptographic bridge for SecureLogin

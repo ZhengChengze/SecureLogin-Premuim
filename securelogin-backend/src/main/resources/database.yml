@@ -1,0 +1,16 @@
+# ==========================================================
+# SecureLoginBackend - Database Storage Configuration
+# Author: Chéngzé
+# ==========================================================
+
+storage:
+  # Supported engines: SQLITE, MYSQL, MARIADB
+  type: "SQLITE"
+  sqlite-file: "securelogin.db"
+  mysql:
+    host: "127.0.0.1"
+    port: 3306
+    database: "securelogin"
+    username: "securelogin_user"
+    password: "CHANGE_ME_DB_PASSWORD"
+    pool-size: 8

@@ -1,0 +1,40 @@
+# ==========================================================
+# SecureLoginBackend - Main Configuration
+# Author: Chéngzé
+# ==========================================================
+
+proxy-security:
+  # CRITICAL: Must be identical to proxy-config.yml on BungeeCord/Waterfall/Velocity (minimum 32 characters)
+  shared-hmac-secret: "9f8e7d6c5b4a392817263544536271809a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d"
+  # Maximum allowed timestamp difference (in milliseconds) between proxy and backend to prevent replay attacks
+  max-clock-skew-ms: 10000
+  # Rejects any player connection that does not receive a signed HMAC payload from SecureLoginProxy within 2 seconds
+  require-signed-proxy-payload: true
+
+registration:
+  # If true, players can register using /register <password> without typing confirmPassword
+  single-password: false
+
+password-policy:
+  min-length: 8
+  max-length: 64
+  require-number: true
+
+security:
+  # Seconds allowed before an unauthenticated player is kicked
+  auth-timeout-seconds: 60
+  # Failed password attempts before temporary lockout
+  max-failed-attempts: 5
+  # Lockout duration in seconds (300s = 5 minutes)
+  lockout-duration-seconds: 300
+  # Only these commands can be executed before authentication completes
+  allowed-prelogin-commands:
+    - "/login"
+    - "/l"
+    - "/register"
+    - "/reg"
+
+session:
+  # Automatically log in returning cracked players on the same verified IP before expiration
+  enabled: true
+  expiration-minutes: 60

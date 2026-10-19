@@ -1,0 +1,45 @@
+name: SecureLoginBackend
+main: com.chengze.securelogin.backend.SecureLoginBackend
+version: v1.0.0-RELEASE
+api-version: "1.21"
+author: Chéngzé
+softdepend: [LuckPerms, PlaceholderAPI, FastLogin]
+commands:
+  register:
+    description: Register a cracked account
+    usage: /register <password> [confirmPassword]
+  login:
+    description: Authenticate a cracked account
+    usage: /login <password>
+  logout:
+    description: End the current session
+    usage: /logout
+  changepassword:
+    description: Change account password
+    usage: /changepassword <oldPassword> <newPassword>
+  premium:
+    description: Manage or view verified Premium status
+    usage: /premium <status|link|unlink>
+  auth:
+    description: Administrative SecureLogin commands
+    usage: /auth <help|reload|unregister|force-login>
+permissions:
+  securelogin.admin:
+    description: Full administrative access to SecureLogin
+    default: op
+    children:
+      securelogin.reload: true
+      securelogin.unregister: true
+      securelogin.forcelogin: true
+  securelogin.bypass:
+    description: Administrative audit node (never grants automatic Premium identity)
+    default: false
+  securelogin.reload:
+    description: Reload SecureLogin configuration files
+    default: op
+  securelogin.unregister:
+    description: Unregister a player's account
+    default: op
+  securelogin.forcelogin:
+    description: Force-authenticate an online player with audit logging
+    default: op
