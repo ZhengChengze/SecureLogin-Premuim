@@ -1,83 +1,56 @@
-# SecureLogin 🔐
+# 🛡️ SecureLogin
+**Enterprise-Grade Authentication, Automatic Premium & Bedrock Login, and Cryptographic Proxy Security**  
+Developed by **Chéngzé** 
 
-**Enterprise-grade authentication and proxy security for Minecraft networks.**
+**SecureLogin** is a modern, lightweight, and ultra-low-overhead authentication plugin inspired by *nLogin*. Designed from the ground up for **Paper / Purpur (1.21.x+)** and proxy networks (**BungeeCord, Waterfall, Velocity**), SecureLogin seamlessly unites **Java Premium**, **Java Cracked/Offline**, and **Bedrock (Geyser/Floodgate)** players on a single server or multi-server network.
 
-SecureLogin is a high-performance authentication and security suite designed for Minecraft networks running **BungeeCord, Waterfall, or Velocity** with **Paper or Purpur** backend servers. Inspired by established authentication plugins such as nLogin, SecureLogin provides a secure and seamless experience for both premium Java Edition accounts and cracked (offline-mode) players.
+---
 
-With automatic premium account detection, cryptographically verified proxy-to-backend communication, secure password storage, and persistent session management, SecureLogin helps protect your network without compromising the player experience.
+### ✨ Why Choose SecureLogin?
 
-## ✨ Features
+* 🚀 **Automatic Premium Login (Zero Commands):** Legitimate paid Minecraft Java Edition players are detected during the handshake, verified via official Mojang session encryption, and logged in automatically—never needing to type `/register` or `/login`.
+* 📱 **Seamless Bedrock / Floodgate Support:** Native, zero-dependency detection for Geyser & Floodgate players (`00000000-0000-0000-...` Xbox Live UUIDs). Bedrock players can automatically skip password login (configurable) while cracked Java players are strictly blocked from spoofing Bedrock prefixes (`.`, `-`, `_`, `+`).
+* 🌐 **Dual Deployment Architecture (2-in-1):**
+  * **Standalone Mode (1 Server):** Drop `SecureLoginBackend` onto a single Paper/Purpur server and run immediately with zero proxy setup.
+  * **Proxy Auth-Lobby Mode (Network):** Pair `SecureLoginProxy` + `SecureLoginBackend` to lock unauthenticated players inside an Auth Lobby and automatically transfer them to your `hub` or `survival` server upon login.
+* 🔐 **HMAC-SHA256 Proxy-to-Backend Bridge:** Every proxy-to-backend authentication state is signed with **HMAC-SHA256**, timestamped, and protected by a one-time cryptographic nonce cache—completely eliminating direct-backend port bypasses, packet spoofing, and replay attacks.
+* ⚡ **Ultra-Low Resource Usage:** Engineered with asynchronous HikariCP database workers, cached `MethodHandle` reflection, and an idle-sleep ticker that consumes **0% CPU** when all online players are authenticated.
 
-### 🔐 Automatic Premium Account Detection
-- Automatically detects eligible Minecraft Java Edition premium accounts.
-- Supports seamless authentication for premium players.
-- Eliminates the need for `/register` and `/login` for verified premium accounts.
-- Integrates premium authentication with your proxy network.
+![Preview](https://cdn.modrinth.com/data/cached_images/92bca8c5b83e8f4038fb2aeaf86325dcacc56490_0.webp)
+---
 
-### 🛡️ Advanced Proxy-to-Backend Security
-- Protects backend servers against unauthorized direct connections.
-- Uses HMAC-SHA256 signatures to verify authentication payloads.
-- Implements nonce verification to help prevent replay attacks.
-- Uses the `securelogin:auth` plugin messaging channel for proxy-to-backend communication.
-- Designed to prevent payload spoofing and tampering.
+### 🔒 Security & Account Protection
 
-### 👤 Cracked Player Authentication
-- Secure registration and login system for offline-mode players.
-- BCrypt password hashing with unique salts.
-- Password complexity requirements.
-- Configurable temporary lockouts after repeated failed login attempts.
-- IP-bound session caching for returning players.
-- Architecture designed with future Argon2 support in mind.
+* **BCrypt Password Hashing:** Industry-standard salted hashing (`cost=12`) ensures plaintext passwords are never stored or logged.
+* **Anti-Bedrock Spoofing Filter:** Blocks cracked Java players from joining with special symbols (`-`, `.`, `+`) to prevent them from impersonating Bedrock players or stealing items.
+* **IP Registration Limiter:** Prevents bot attacks and alt-account abuse with a configurable maximum account limit per IP address (`max-accounts-per-ip`).
+* **Smart IP Session Resumption:** Returning cracked players on the same verified IP address automatically resume their session without re-typing their password until the session expires.
+* **Brute-Force Lockout:** Configurable maximum failed login attempts and temporary account lockouts.
 
-### 🎨 Modern User Interface
-- Adventure MiniMessage support, including gradients and advanced text formatting.
-- Customizable login and registration messages.
-- Action bar notifications and countdowns.
-- Title and subtitle prompts.
-- Configurable authentication feedback for a polished player experience.
+---
 
-### 🗄️ Flexible Database Support
-- **SQLite** for simple, lightweight deployments.
-- **MySQL / MariaDB** for larger networks and shared database environments.
-- HikariCP connection pooling for efficient database connections.
-- Modular database architecture designed for maintainability and scalability.
+### ⌨️ Commands & Permissions
 
-### 🔌 Ecosystem Integrations
-- **LuckPerms:** Custom authentication and premium-status context support.
-- **PlaceholderAPI:** Authentication placeholders, including `%securelogin_is_authenticated%`.
-- Designed for mixed proxy and backend environments.
+| Command | Description | Permission |
+| :--- | :--- | :--- |
+| `/register <pass> [confirm]` | Register a new cracked account | *Default (All)* |
+| `/login <password>` | Authenticate an existing cracked account | *Default (All)* |
+| `/logout` | Safely end your active session | *Default (All)* |
+| `/changepassword <old> <new>` | Change your account password & refresh sessions | *Default (All)* |
+| `/premium <status\|link\|unlink>` | View or manage Mojang Premium verification | *Default (All)* |
+| `/auth reload` | Reload configuration and message files | `securelogin.reload` |
+| `/auth unregister <player>` | Delete a player's registration from the database | `securelogin.unregister` |
+| `/auth force-login <player>` | Force-authenticate an online player (audit logged) | `securelogin.forcelogin` |
 
-## 📦 Supported Platforms
+*Full administrative access node:* `securelogin.admin`
 
-| Component | Supported platforms |
-|---|---|
-| Proxy | BungeeCord, Waterfall, Velocity |
-| Backend | Paper, Purpur |
-| Database | SQLite, MySQL, MariaDB |
-| Java Edition | Premium and offline-mode players |
+---
 
-*Compatibility depends on the specific build, Minecraft version, and available platform adapters.*
+### 🔌 Integrations & Storage
 
-## 🏗️ Modular Architecture
-
-SecureLogin uses a multi-module Maven architecture to separate authentication logic from platform-specific implementations.
-
-- **`securelogin-common`** — Shared cryptographic utilities, HMAC signing, password hashing, database models, connection pooling, and JUnit 5 tests.
-- **`securelogin-proxy`** — Proxy-side authentication coordination, premium account handling, and secure proxy-to-backend communication.
-- **`securelogin-backend`** — Backend authentication enforcement, including restrictions on movement, chat, inventory interactions, commands, and combat until authentication succeeds.
-
-## 🚀 Project Goals
-
-SecureLogin aims to provide:
-
-- Strong security for mixed premium and offline-mode networks.
-- A seamless login experience for verified premium accounts.
-- Reliable authentication for offline-mode players.
-- Protection against common proxy-bypass and authentication-spoofing attacks.
-- A modular, maintainable foundation for future features.
-
-## 👨‍💻 Developer
-
-**Author:** Chéngzé 
-
-SecureLogin is built for server owners who want a unified authentication solution with security, performance, and flexibility at its core.
+* **Databases:** **SQLite** (out-of-the-box default) and **MySQL / MariaDB** (HikariCP pooled).
+* **LuckPerms:** Registers real-time contexts (`securelogin:authenticated` and `securelogin:premium`).
+* **PlaceholderAPI:**
+  * `%securelogin_is_authenticated%` (`true` / `false`)
+  * `%securelogin_account_type%` (`Premium` / `Cracked`)
+* **UI & Formatting:** Full **Kyori Adventure MiniMessage** support with customizable gradients, BossBar countdowns, ActionBars, and Titles.
